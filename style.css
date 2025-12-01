@@ -1,26 +1,86 @@
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-  30%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
-  50% {
-    transform: translate3d(-4px, 0, 0);
-  }
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+
+/*  Global & Background: สร้างพื้นหลังแบบเคลื่อนไหวได้ */
+body {
+    font-family: 'Inter', sans-serif;
+    /* ทับค่า bg-gray-100 เดิมด้วย Gradient สวยๆ */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #333;
 }
+
+/* Keyframes สำหรับพื้นหลังขยับได้ */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/*  Glassmorphism Card: ทำให้กล่องดูเหมือนกระจกฝ้า */
+.bg-white {
+    background: rgba(255, 255, 255, 0.85) !important; /* โปร่งแสงเล็กน้อย */
+    backdrop-filter: blur(10px); /* เบลอฉากหลัง */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37) !important;
+}
+
+/*  Dice Display Styling: ทำให้กล่องลูกเต๋าดูมีมิติ */
+#diceDisplay {
+    background: #2d3748; /* สีเทาเข้ม */
+    border-radius: 24px;
+    box-shadow: inset 5px 5px 10px #1a202c, 
+                inset -5px -5px 10px #4a5568;
+    transition: transform 0.2s;
+}
+
+/* ลูกเล่น: เมื่อเอาเมาส์ไปชี้ลูกเต๋า */
+#diceDisplay:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+/* The SHAKE Animation: หัวใจสำคัญตอนกดปุ่ม Roll! */
 .animate-shake {
-  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
+
+@keyframes shake {
+    10%, 90% { transform: translate3d(-1px, 0, 0) rotate(-1deg); }
+    20%, 80% { transform: translate3d(2px, 0, 0) rotate(2deg); }
+    30%, 50%, 70% { transform: translate3d(-4px, 0, 0) rotate(-4deg); }
+    40%, 60% { transform: translate3d(4px, 0, 0) rotate(4deg); }
+}
+
+
+/*  Entry Animation: ให้ประวัติการทอยเด้งเข้ามา */
+#historyList div {
+    animation: slideIn 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*  Button Glow: เพิ่มแสงวิบวับให้ปุ่ม */
+#rollButton {
+    position: relative;
+    overflow: hidden;
+    background-size: 200% auto;
+    transition: 0.5s;
+}
+
+#rollButton:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 143);
+}
+
 
 
